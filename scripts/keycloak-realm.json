@@ -3,9 +3,9 @@
   "enabled": true,
   "users": [
     {
-      "username": "employee1",
+      "username": "employee",
       "enabled": true,
-      "email": "employee1@example.com",
+      "email": "employee@example.com",
       "emailVerified": true,
       "firstName": "Employee",
       "lastName": "One",
@@ -14,15 +14,15 @@
       "credentials": [
         {
           "type": "password",
-          "value": "password1",
+          "value": "emp@password",
           "temporary": false
         }
       ]
     },
     {
-      "username": "affiliate1",
+      "username": "affiliate",
       "enabled": true,
-      "email": "affiliate1@example.com",
+      "email": "affiliate@example.com",
       "emailVerified": true,
       "firstName": "Affiliate",
       "lastName": "One",
@@ -31,13 +31,13 @@
       "credentials": [
         {
           "type": "password",
-          "value": "password2",
+          "value": "aff@password",
           "temporary": false
         }
       ]
     },
     {
-      "username": "customer1",
+      "username": "customer",
       "enabled": true,
       "email": "customer1@example.com",
       "emailVerified": true,
@@ -48,7 +48,7 @@
       "credentials": [
         {
           "type": "password",
-          "value": "password3",
+          "value": "cust@password",
           "temporary": false
         }
       ]

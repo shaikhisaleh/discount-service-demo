@@ -14,5 +14,5 @@ public class BillDto {
     List<ItemDto> items = new ArrayList<>();
     List<String> appliedDiscounts = new ArrayList<>();
     Double totalPrice;
-    Double amountAfterDiscount;
+    Double priceAfterDiscount;
 }
