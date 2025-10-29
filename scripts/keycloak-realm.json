@@ -1,0 +1,69 @@
+{
+  "realm": "discount-realm",
+  "enabled": true,
+  "users": [
+    {
+      "username": "employee1",
+      "enabled": true,
+      "email": "employee1@example.com",
+      "emailVerified": true,
+      "firstName": "Employee",
+      "lastName": "One",
+      "requiredActions": [],
+      "attributes": {},
+      "credentials": [
+        {
+          "type": "password",
+          "value": "password1",
+          "temporary": false
+        }
+      ]
+    },
+    {
+      "username": "affiliate1",
+      "enabled": true,
+      "email": "affiliate1@example.com",
+      "emailVerified": true,
+      "firstName": "Affiliate",
+      "lastName": "One",
+      "requiredActions": [],
+      "attributes": {},
+      "credentials": [
+        {
+          "type": "password",
+          "value": "password2",
+          "temporary": false
+        }
+      ]
+    },
+    {
+      "username": "customer1",
+      "enabled": true,
+      "email": "customer1@example.com",
+      "emailVerified": true,
+      "firstName": "Customer",
+      "lastName": "One",
+      "requiredActions": [],
+      "attributes": {},
+      "credentials": [
+        {
+          "type": "password",
+          "value": "password3",
+          "temporary": false
+        }
+      ]
+    }
+  ],
+  "clients": [
+    {
+      "clientId": "discount",
+      "publicClient": true,
+      "redirectUris": ["*"],
+      "directAccessGrantsEnabled": true,
+      "serviceAccountsEnabled": false,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "authorizationServicesEnabled": false
+    }
+  ]
+}
