@@ -40,7 +40,7 @@ All project documentation is located in the `docs/` directory. This includes:
    mvn test
    ```
 5. **Access API documentation:**
-   - Swagger UI: `http://localhost:8080/swagger-ui.html`
+   - Swagger UI: [Swagger UI link](http://localhost:8080/swagger-ui/index.html)
    - Postman Collection: Import the provided Postman collection file located in the `docs/` directory.
 
 ## Authentication

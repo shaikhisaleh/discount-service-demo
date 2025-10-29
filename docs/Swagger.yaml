@@ -1,0 +1,487 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+  - url: http://localhost:8085
+    description: Generated server url
+paths:
+  /v1/api/users/{id}:
+    get:
+      tags:
+        - user-controller
+      operationId: getById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: object
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: object
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+    put:
+      tags:
+        - user-controller
+      operationId: update
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserRequest"
+        required: true
+      responses:
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: object
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: object
+        "202":
+          description: Accepted
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+    delete:
+      tags:
+        - user-controller
+      operationId: delete
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: object
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: object
+        "204":
+          description: No Content
+  /v1/api/discounts/{id}:
+    get:
+      tags:
+        - discount-controller
+      operationId: getById_1
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: object
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: object
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/DiscountResponse"
+    put:
+      tags:
+        - discount-controller
+      operationId: update_1
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DiscountRequest"
+        required: true
+      responses:
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: object
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: object
+        "202":
+          description: Accepted
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/DiscountResponse"
+    delete:
+      tags:
+        - discount-controller
+      operationId: delete_1
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: object
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: object
+        "204":
+          description: No Content
+  /v1/api/users:
+    get:
+      tags:
+        - user-controller
+      operationId: getAll
+      responses:
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: object
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: object
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UserResponse"
+    post:
+      tags:
+        - user-controller
+      operationId: create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserRequest"
+        required: true
+      responses:
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: object
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: object
+        "201":
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+  /v1/api/discounts:
+    get:
+      tags:
+        - discount-controller
+      operationId: getAll_1
+      responses:
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: object
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: object
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DiscountResponse"
+    post:
+      tags:
+        - discount-controller
+      operationId: create_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DiscountRequest"
+        required: true
+      responses:
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: object
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: object
+        "201":
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/DiscountResponse"
+  /v1/api/discounts/apply:
+    post:
+      tags:
+        - discount-controller
+      operationId: applyDiscount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BillDto"
+        required: true
+      responses:
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: object
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: object
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/BillDto"
+components:
+  schemas:
+    UserRequest:
+      required:
+        - email
+        - userType
+        - username
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        userType:
+          pattern: ^(CUSTOMER|EMPLOYEE|AFFILIATE)$
+          type: string
+    UserResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        username:
+          type: string
+        email:
+          type: string
+        userType:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    DiscountRequest:
+      required:
+        - amount
+        - code
+        - discountType
+        - expiryDate
+      type: object
+      properties:
+        code:
+          type: string
+        description:
+          type: string
+        amount:
+          type: number
+          format: double
+        discountType:
+          pattern: FLAT_RATE|PERCENTAGE
+          type: string
+          enum:
+            - FLAT_RATE
+            - PERCENTAGE_BASED
+        active:
+          type: boolean
+        expiryDate:
+          type: string
+          format: date-time
+        minAccountAgeYears:
+          type: integer
+          format: int32
+        perAmountSpent:
+          type: number
+          format: double
+        userType:
+          pattern: EMPLOYEE|AFFILIATE|CUSTOMER
+          type: string
+          enum:
+            - CUSTOMER
+            - EMPLOYEE
+            - AFFILIATE
+        excludedCategories:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+    DiscountResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        code:
+          type: string
+        description:
+          type: string
+        amount:
+          type: number
+          format: double
+        discountType:
+          type: string
+          enum:
+            - FLAT_RATE
+            - PERCENTAGE_BASED
+        active:
+          type: boolean
+        expiryDate:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        minAccountAgeYears:
+          type: integer
+          format: int32
+        perAmountSpent:
+          type: number
+          format: double
+        userType:
+          type: string
+          enum:
+            - CUSTOMER
+            - EMPLOYEE
+            - AFFILIATE
+        excludedCategories:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+    BillDto:
+      required:
+        - items
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/ItemDto"
+        appliedDiscounts:
+          type: array
+          items:
+            type: string
+        totalPrice:
+          type: number
+          format: double
+        priceAfterDiscount:
+          type: number
+          format: double
+    ItemDto:
+      required:
+        - category
+        - name
+        - price
+        - quantity
+      type: object
+      properties:
+        name:
+          type: string
+        price:
+          type: number
+          format: double
+        quantity:
+          type: integer
+          format: int32
+        category:
+          type: string
