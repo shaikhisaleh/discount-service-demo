@@ -1,0 +1,456 @@
+{
+	"info": {
+		"_postman_id": "d2e65940-b30b-43ab-ad36-ede0d7cd81a4",
+		"name": "Discount Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24814910"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{discountBaseUrl}}/v1/api/users",
+							"host": [
+								"{{discountBaseUrl}}"
+							],
+							"path": [
+								"v1",
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{discountBaseUrl}}/v1/api/users/69015a2db368e174fece5f48",
+							"host": [
+								"{{discountBaseUrl}}"
+							],
+							"path": [
+								"v1",
+								"api",
+								"users",
+								"69015a2db368e174fece5f48"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"salshaikhi\",\r\n    \"email\":\"test@email.com\",\r\n    \"userType\":\"EMPLOYEE\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{discountBaseUrl}}/v1/api/users",
+							"host": [
+								"{{discountBaseUrl}}"
+							],
+							"path": [
+								"v1",
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User by Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"salshaikhi\",\r\n    \"email\":\"test@email.com\",\r\n    \"userType\":\"CUSTOMER\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{discountBaseUrl}}/v1/api/users/69011d806fc810b398c12405",
+							"host": [
+								"{{discountBaseUrl}}"
+							],
+							"path": [
+								"v1",
+								"api",
+								"users",
+								"69011d806fc810b398c12405"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{discountBaseUrl}}/v1/api/users/69011d806fc810b398c12405",
+							"host": [
+								"{{discountBaseUrl}}"
+							],
+							"path": [
+								"v1",
+								"api",
+								"users",
+								"69011d806fc810b398c12405"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user token",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "discount",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "affiliate",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "aff@password",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "openid profile email roles",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "RgHSpRTidFawWIy9wyWuKsgBlE9y7mIN",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{keycloak_url}}/realms/{{realm}}/protocol/openid-connect/token",
+							"host": [
+								"{{keycloak_url}}"
+							],
+							"path": [
+								"realms",
+								"{{realm}}",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dsicounts",
+			"item": [
+				{
+					"name": "All Discounts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{discountBaseUrl}}/v1/api/discounts",
+							"host": [
+								"{{discountBaseUrl}}"
+							],
+							"path": [
+								"v1",
+								"api",
+								"discounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Discount by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{discountBaseUrl}}/v1/api/discounts/69011d806fc810b398c12405",
+							"host": [
+								"{{discountBaseUrl}}"
+							],
+							"path": [
+								"v1",
+								"api",
+								"discounts",
+								"69011d806fc810b398c12405"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Discount",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\":\"FLAT_5\",\r\n    \"minAccountAgeYears\": 2,\r\n    \"userType\": null,\r\n    \"discountType\":\"FLAT_RATE\", //PERCENTAGE_BASED or FLAT_RATE\r\n    \"perAmountSpent\": 100,\r\n    \"excludedCategories\": [],\r\n    \"description\":\"5 usd discount per 100 spent\",\r\n    \"amount\":5,\r\n    \"isPercentage\":false,\r\n    \"active\":true,\r\n    \"expiryDate\":\"2026-05-21T15:30:00Z\"\r\n\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{discountBaseUrl}}/v1/api/discounts",
+							"host": [
+								"{{discountBaseUrl}}"
+							],
+							"path": [
+								"v1",
+								"api",
+								"discounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User by Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\": \"EMP_50\",\r\n    \"condition\": {\r\n        \"minAccountAgeYears\": null,\r\n        \"userType\": \"EMPLOYEE\",\r\n        \"perAmountSpent\": null,\r\n        \"excludedCategories\": [\"Groceries\"]\r\n    },\r\n    \"description\": \"50% discount for employees\",\r\n    \"amount\": 50.0,\r\n    \"active\": true,\r\n    \"expiryDate\": \"2026-10-21T15:30:00Z\",\r\n    \"isPercentage\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{discountBaseUrl}}/v1/api/discounts/69012c4f8b775b25d19af2aa",
+							"host": [
+								"{{discountBaseUrl}}"
+							],
+							"path": [
+								"v1",
+								"api",
+								"discounts",
+								"69012c4f8b775b25d19af2aa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Discount",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{discountBaseUrl}}/v1/api/discounts/69012b3bf9ac1511079c4eeb",
+							"host": [
+								"{{discountBaseUrl}}"
+							],
+							"path": [
+								"v1",
+								"api",
+								"discounts",
+								"69012b3bf9ac1511079c4eeb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "apply Discount",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"items\":[\r\n        {\r\n            \"name\":\"Laptop\",\r\n            \"price\":500,\r\n            \"quantity\":1,\r\n            \"category\":\"Electronics\"\r\n        },\r\n        {\r\n            \"name\":\"iPhone\",\r\n            \"price\":2500,\r\n            \"quantity\":2,\r\n            \"category\":\"Electronics\"\r\n        },\r\n        {\r\n            \"name\":\"Earbuds\",\r\n            \"price\":350,\r\n            \"quantity\":2,\r\n            \"category\":\"Electronics\"\r\n        },\r\n        {\r\n            \"name\":\"Milk\",\r\n            \"price\":10,\r\n            \"quantity\":200,\r\n            \"category\":\"Groceries\"\r\n        },\r\n                {\r\n            \"name\":\"Rice\",\r\n            \"price\":60,\r\n            \"quantity\":1,\r\n            \"category\":\"Groceries\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{discountBaseUrl}}/v1/api/discounts/apply",
+							"host": [
+								"{{discountBaseUrl}}"
+							],
+							"path": [
+								"v1",
+								"api",
+								"discounts",
+								"apply"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{keycloak_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					"const keycloakUrl = \"http://localhost:8081/realms/discount-realm/protocol/openid-connect/token\";\r",
+					"const realm = \"discount-realm\";\r",
+					"const clientId = \"discount\";\r",
+					"const username = \"employee\";\r",
+					"const password = \"emp@password\";\r",
+					"const grantType = \"password\";\r",
+					" \r",
+					"pm.sendRequest({\r",
+					"    url: keycloakUrl,\r",
+					"    method: \"POST\",\r",
+					"    header: {\r",
+					"        \"Content-Type\": \"application/x-www-form-urlencoded\"\r",
+					"    },\r",
+					"    body: {\r",
+					"        mode: \"urlencoded\",\r",
+					"        urlencoded: [\r",
+					"            { key: \"client_id\", value: clientId },\r",
+					"            { key: \"username\", value: username},\r",
+					"            { key: \"password\", value: password},\r",
+					"            { key: \"grant_type\", value: grantType }\r",
+					"        ]\r",
+					"    }\r",
+					"}, function (err, res) {\r",
+					"    if (err) {\r",
+					"        console.error(\"Token request failed:\", err);\r",
+					"    } else {\r",
+					"        let jsonData = res.json();\r",
+					"        let token = jsonData.access_token;\r",
+					" \r",
+					"        if (token) {\r",
+					"            // Store the token in an environment variable\r",
+					"            console.log(token)\r",
+					"            pm.collectionVariables.set(\"keycloak_token\", token);\r",
+					"            \r",
+					"            // Alternatively, store it in a collection variable (if needed)\r",
+					"            // pm.collectionVariables.set(\"keycloak_token\", token);\r",
+					" \r",
+					"            console.log(\"Token assigned to variable: keycloak_token\");\r",
+					"        } else {\r",
+					"            console.error(\"No token received. Response:\", jsonData);\r",
+					"        }\r",
+					"    }\r",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "discountBaseUrl",
+			"value": ""
+		},
+		{
+			"key": "keycloak_token",
+			"value": ""
+		},
+		{
+			"key": "keycloak_url",
+			"value": ""
+		},
+		{
+			"key": "realm",
+			"value": ""
+		}
+	]
+}

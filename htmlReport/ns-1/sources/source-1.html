@@ -1,0 +1,234 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DiscountService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.salshaikhi.discountservice.service</a>
+</div>
+
+<h1>Coverage Summary for Class: DiscountService (com.salshaikhi.discountservice.service)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DiscountService</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    78.6%
+  </span>
+  <span class="absValue">
+    (11/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    97.8%
+  </span>
+  <span class="absValue">
+    (45/46)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.salshaikhi.discountservice.service;
+&nbsp;
+&nbsp;import com.salshaikhi.discountservice.dto.BillDto;
+&nbsp;import com.salshaikhi.discountservice.dto.DiscountRequest;
+&nbsp;import com.salshaikhi.discountservice.dto.DiscountResponse;
+&nbsp;import com.salshaikhi.discountservice.entity.Discount;
+&nbsp;import com.salshaikhi.discountservice.entity.FlatRateDiscount;
+&nbsp;import com.salshaikhi.discountservice.entity.PercentageBasedDiscount;
+&nbsp;import com.salshaikhi.discountservice.entity.User;
+&nbsp;import com.salshaikhi.discountservice.entity.enums.DiscountType;
+&nbsp;import com.salshaikhi.discountservice.exception.DuplicateCodeException;
+&nbsp;import com.salshaikhi.discountservice.exception.NotFoundException;
+&nbsp;import com.salshaikhi.discountservice.mapper.DiscountMapper;
+&nbsp;import com.salshaikhi.discountservice.repository.DiscountRepository;
+&nbsp;import com.salshaikhi.discountservice.security.SecurityUtil;
+&nbsp;import lombok.AllArgsConstructor;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import java.util.Comparator;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;@Service
+&nbsp;@AllArgsConstructor
+&nbsp;public class DiscountService {
+&nbsp;    private final DiscountRepository discountRepository;
+&nbsp;    private final DiscountMapper discountMapper;
+&nbsp;    private final UserService userService;
+&nbsp;
+&nbsp;    public List&lt;DiscountResponse&gt; getAll() {
+<b class="fc">&nbsp;        return discountRepository.findAll().stream()</b>
+<b class="fc">&nbsp;                .map(discountMapper::discountToResponse).toList();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Discount getOrNotFound(String id) {
+<b class="fc">&nbsp;        return discountRepository.findById(id)</b>
+<b class="fc">&nbsp;                .orElseThrow(() -&gt; new NotFoundException(&quot;Discount not found&quot;));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public DiscountResponse getDiscountResponse(String id) {
+<b class="fc">&nbsp;        Discount discount = getOrNotFound(id);</b>
+<b class="fc">&nbsp;        return discountMapper.discountToResponse(discount);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public DiscountResponse create(DiscountRequest request) {
+<b class="fc">&nbsp;        String code = request.getCode().trim();</b>
+<b class="fc">&nbsp;        if (discountRepository.existsByCodeIgnoreCase(code)) {</b>
+<b class="fc">&nbsp;            throw new DuplicateCodeException(&quot;Discount code: &quot; + code + &quot; already exists&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        Discount newDiscount;
+<b class="fc">&nbsp;        if (DiscountType.FLAT_RATE.equals(request.getDiscountType())) {</b>
+<b class="fc">&nbsp;            newDiscount = new FlatRateDiscount();</b>
+<b class="pc">&nbsp;        } else if (DiscountType.PERCENTAGE_BASED.equals(request.getDiscountType())) {</b>
+<b class="fc">&nbsp;            newDiscount = new PercentageBasedDiscount();</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Invalid discount type: &quot; + request.getDiscountType());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        discountMapper.requestToDiscount(request, newDiscount);</b>
+<b class="fc">&nbsp;        return discountMapper.discountToResponse(discountRepository.save(newDiscount));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public DiscountResponse update(String id, DiscountRequest request) {
+<b class="fc">&nbsp;        Discount discount = getOrNotFound(id);</b>
+<b class="fc">&nbsp;        discountMapper.requestToDiscount(request, discount);</b>
+<b class="fc">&nbsp;        return discountMapper.discountToResponse(discountRepository.save(discount));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void delete(String id) {
+<b class="fc">&nbsp;        discountRepository.deleteById(id);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public BillDto applyDiscount(BillDto billDto) {
+<b class="fc">&nbsp;        User currentUser = userService.getByEmail(SecurityUtil.getUserEmail());</b>
+&nbsp;
+<b class="fc">&nbsp;        Double billPrice = billDto.getItems().stream().mapToDouble(item -&gt; item.getPrice() * item.getQuantity()).sum();</b>
+<b class="fc">&nbsp;        billDto.setTotalPrice(billPrice);</b>
+<b class="fc">&nbsp;        Double discountAmountSum = 0.0;</b>
+&nbsp;
+&nbsp;        // Apply all flat rate discounts
+<b class="fc">&nbsp;        discountAmountSum += applyAllFlatRateDiscounts(billDto, currentUser);</b>
+&nbsp;
+&nbsp;        // Apply highest percentage discount
+<b class="fc">&nbsp;        discountAmountSum += applyHighestPercentageDiscount(billDto, currentUser);</b>
+<b class="fc">&nbsp;        billDto.setPriceAfterDiscount(billPrice - discountAmountSum);</b>
+<b class="fc">&nbsp;        return billDto;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private double applyAllFlatRateDiscounts(BillDto billDto, User currentUser) {
+<b class="fc">&nbsp;        List&lt;FlatRateDiscount&gt; flatRateDiscounts = discountRepository.findAllFlatRateDiscounts();</b>
+<b class="fc">&nbsp;        double totalFlatDiscountAmount = 0.0;</b>
+&nbsp;
+<b class="fc">&nbsp;        for (Discount discount : flatRateDiscounts) {</b>
+<b class="fc">&nbsp;            double discountAmount = discount.applyDiscount(billDto, currentUser);</b>
+<b class="pc">&nbsp;            if (discountAmount &gt; 0) {</b>
+<b class="fc">&nbsp;                totalFlatDiscountAmount += discountAmount;</b>
+<b class="fc">&nbsp;                billDto.getAppliedDiscounts().add(discount.getCode());</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return totalFlatDiscountAmount;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private double applyHighestPercentageDiscount(BillDto billDto, User currentUser) {
+<b class="fc">&nbsp;        List&lt;PercentageBasedDiscount&gt; percentageDiscounts = discountRepository.findAllPercentageBasedDiscounts();</b>
+&nbsp;
+<b class="fc">&nbsp;        PercentageBasedDiscount highestPercentDiscount = percentageDiscounts.stream()</b>
+<b class="pc">&nbsp;                .filter(discount -&gt; discount.getAmount() &gt; 0)</b>
+<b class="fc">&nbsp;                .max(Comparator.comparingDouble(Discount::getAmount))</b>
+<b class="fc">&nbsp;                .orElse(null);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (highestPercentDiscount != null) {</b>
+<b class="fc">&nbsp;            double percentDiscountAmount = highestPercentDiscount.applyDiscount(billDto, currentUser);</b>
+<b class="fc">&nbsp;            billDto.getAppliedDiscounts().add(highestPercentDiscount.getCode());</b>
+<b class="fc">&nbsp;            return percentDiscountAmount;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return 0.0;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-10-29 20:15</div>
+</div>
+</body>
+</html>
